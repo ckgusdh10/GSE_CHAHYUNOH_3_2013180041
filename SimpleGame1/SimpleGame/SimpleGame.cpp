@@ -14,8 +14,10 @@ but WITHOUT ANY WARRANTY.
 #include "Dependencies\freeglut.h"
 
 #include "Renderer.h"
+#include "Object.h"
 
 Renderer *g_Renderer = NULL;
+Object g_Object(50, 50, 0, 20, 1, 0, 0, 1);
 
 void RenderScene(void)
 {
@@ -24,6 +26,8 @@ void RenderScene(void)
 
 	// Renderer Test
 	g_Renderer->DrawSolidRect(0, 0, 0, 4, 1, 0, 1, 1);
+	g_Renderer->DrawSolidRect(g_Object.getPosX(), g_Object.getPosY(), g_Object.getPosZ(), g_Object.getPosSize(),
+		g_Object.getPosR(), g_Object.getPosG(), g_Object.getPosB(), g_Object.getPosA());
 
 	glutSwapBuffers();
 }

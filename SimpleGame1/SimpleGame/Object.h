@@ -12,6 +12,11 @@ class Object {
 	float m_g;
 	float m_b;
 	float m_a;
+	float m_speed;
+
+	int m_dirX = 1;
+	int m_dirY = 1;
+
 public:
 	Object(float x, float y, float z, float size, float r, float g, float b, float a);
 	~Object();
@@ -24,4 +29,11 @@ public:
 	float getPosG();
 	float getPosB();
 	float getPosA();
+
+	void setPosX(float x);
+	void setPosY(float y);
+	void setPosZ(float z);
+	
+
+	void Update();
 };

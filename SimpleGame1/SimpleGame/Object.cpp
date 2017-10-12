@@ -59,3 +59,60 @@ float Object::getPosA()
 {
 	return m_a;
 }
+
+void Object::setPosX(float x)
+{
+	m_x = x;
+}
+
+void Object::setPosY(float y)
+{
+	m_y = y;
+}
+
+void Object::setPosZ(float z)
+{
+	m_z = z;
+}
+
+void Object::Update()
+{
+	m_x = m_x + (m_dirX * 0.1);
+	m_y = m_y + (m_dirY * 0.1);
+	if (m_y >= 250 && m_x >= 250)
+	{
+		m_dirY = -m_dirY;
+		m_dirX = -m_dirX;
+	}
+	else if (m_y <= -250 && m_x >= 250)
+	{
+		m_dirY = -m_dirY;
+		m_dirX = -m_dirX;
+	}
+	else if (m_y <= -250 && m_x <= -250)
+	{
+		m_dirY = -m_dirY;
+		m_dirX = -m_dirX;
+	}
+	else if (m_y >= 250 && m_x <= -250)
+	{
+		m_dirY = -m_dirY;
+		m_dirX = -m_dirX;
+	}
+	else if (m_y >= 250)
+	{
+		m_dirY = -m_dirY;
+	}
+	else if(m_x >= 250)
+	{
+		m_dirX = -m_dirX;
+	}
+	else if (m_y <= -250)
+	{
+		m_dirY = -m_dirY;
+	}
+	else if(m_x <= -250)
+	{
+		m_dirX = -m_dirX;
+	}
+}

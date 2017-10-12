@@ -15,6 +15,7 @@ but WITHOUT ANY WARRANTY.
 
 #include "Renderer.h"
 #include "Object.h"
+using namespace std;
 
 Renderer *g_Renderer = NULL;
 Object g_Object(50, 50, 0, 20, 1, 0, 0, 1);
@@ -26,9 +27,13 @@ void RenderScene(void)
 
 	// Renderer Test
 	g_Renderer->DrawSolidRect(0, 0, 0, 4, 1, 0, 1, 1);
+
 	g_Renderer->DrawSolidRect(g_Object.getPosX(), g_Object.getPosY(), g_Object.getPosZ(), g_Object.getPosSize(),
 		g_Object.getPosR(), g_Object.getPosG(), g_Object.getPosB(), g_Object.getPosA());
 
+	g_Object.Update();
+	
+	//cout << g_Object.getPosX() << " " << g_Object.getPosY() << endl;
 	glutSwapBuffers();
 }
 
@@ -39,6 +44,12 @@ void Idle(void)
 
 void MouseInput(int button, int state, int x, int y)
 {
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
+	{
+		g_Object.setPosX(x - 250);
+		g_Object.setPosY(-y + 250);
+		cout << "Å¬¸¯" << endl;
+	}
 	RenderScene();
 }
 
@@ -77,7 +88,7 @@ int main(int argc, char **argv)
 	{
 		std::cout << "Renderer could not be initialized.. \n";
 	}
-
+	
 	glutDisplayFunc(RenderScene);
 	glutIdleFunc(Idle);
 	glutKeyboardFunc(KeyInput);
@@ -85,7 +96,7 @@ int main(int argc, char **argv)
 	glutSpecialFunc(SpecialKeyInput);
 
 	glutMainLoop();
-
+	
 	delete g_Renderer;
 
     return 0;

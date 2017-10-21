@@ -15,10 +15,12 @@ but WITHOUT ANY WARRANTY.
 
 #include "Renderer.h"
 #include "Object.h"
+#include "SceneMgr.h"
 using namespace std;
 
 Renderer *g_Renderer = NULL;
 Object g_Object(50, 50, 0, 20, 1, 0, 0, 1);
+SceneMgr* g_SceneMgr = NULL;
 
 void RenderScene(void)
 {
@@ -27,11 +29,14 @@ void RenderScene(void)
 
 	// Renderer Test
 	g_Renderer->DrawSolidRect(0, 0, 0, 4, 1, 0, 1, 1);
+	g_SceneMgr->Update();
+	g_SceneMgr->Collision();
+	g_SceneMgr->DrawAll();
 
-	g_Renderer->DrawSolidRect(g_Object.getPosX(), g_Object.getPosY(), g_Object.getPosZ(), g_Object.getPosSize(),
+	/*g_Renderer->DrawSolidRect(g_Object.getPosX(), g_Object.getPosY(), g_Object.getPosZ(), g_Object.getPosSize(),
 		g_Object.getPosR(), g_Object.getPosG(), g_Object.getPosB(), g_Object.getPosA());
-
-	g_Object.Update();
+*/
+	//g_Object.Update();
 	
 	//cout << g_Object.getPosX() << " " << g_Object.getPosY() << endl;
 	glutSwapBuffers();
@@ -65,6 +70,7 @@ void SpecialKeyInput(int key, int x, int y)
 
 int main(int argc, char **argv)
 {
+	srand((unsigned)time(NULL));
 	// Initialize GL things
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
@@ -84,10 +90,11 @@ int main(int argc, char **argv)
 
 	// Initialize Renderer
 	g_Renderer = new Renderer(500, 500);
-	if (!g_Renderer->IsInitialized())
+	g_SceneMgr = new SceneMgr;
+	/*if (!g_Renderer->IsInitialized())
 	{
 		std::cout << "Renderer could not be initialized.. \n";
-	}
+	}*/
 	
 	glutDisplayFunc(RenderScene);
 	glutIdleFunc(Idle);
@@ -97,7 +104,7 @@ int main(int argc, char **argv)
 
 	glutMainLoop();
 	
-	delete g_Renderer;
+	//delete g_Renderer;
 
     return 0;
 }

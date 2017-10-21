@@ -1,6 +1,19 @@
 #include "stdafx.h"
 #include "Object.h"
 
+Object::Object()
+{
+	
+	m_x = 0;
+	m_y = 0;
+	m_z = 0;
+	m_size = 10;
+	m_r = 1.0f;
+	m_g = 0.0f;
+	m_b = 0.0f;
+	m_a = 1.0f;
+}
+
 Object::Object(float x, float y, float z, float size, float r, float g, float b, float a)
 {
 	m_x = x;
@@ -75,6 +88,41 @@ void Object::setPosZ(float z)
 	m_z = z;
 }
 
+void Object::setSize(float size)
+{
+	m_size = size;
+}
+
+void Object::setColorR(float red)
+{
+	m_r = red;
+}
+
+void Object::setColorG(float green)
+{
+	m_g = green;
+}
+
+void Object::setColorB(float blue)
+{
+	m_b = blue;
+}
+
+void Object::setColorA(float a)
+{
+	m_a = a;
+}
+
+void Object::setDirX(int dirX)
+{
+	m_dirX = dirX;
+}
+
+void Object::setDirY(int dirY)
+{
+	m_dirY = dirY;
+}
+
 void Object::Update()
 {
 	m_x = m_x + (m_dirX * 0.1);
@@ -116,3 +164,5 @@ void Object::Update()
 		m_dirX = -m_dirX;
 	}
 }
+
+

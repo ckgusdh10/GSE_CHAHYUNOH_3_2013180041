@@ -1,6 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include "Renderer.h"
+#include <time.h>
+
 
 
 class Object {
@@ -14,10 +16,11 @@ class Object {
 	float m_a;
 	float m_speed;
 
-	int m_dirX = 1;
-	int m_dirY = 1;
+	float m_dirX = 1;
+	float m_dirY = 1;
 
 public:
+	Object();
 	Object(float x, float y, float z, float size, float r, float g, float b, float a);
 	~Object();
 
@@ -33,7 +36,14 @@ public:
 	void setPosX(float x);
 	void setPosY(float y);
 	void setPosZ(float z);
-	
+	void setSize(float size);
+	void setColorR(float red);
+	void setColorG(float green);
+	void setColorB(float blue);
+	void setColorA(float a);
+	void setDirX(int dirX);
+	void setDirY(int dirY);
 
 	void Update();
+	
 };

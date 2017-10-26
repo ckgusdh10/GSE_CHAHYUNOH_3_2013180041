@@ -9,6 +9,8 @@ but WITHOUT ANY WARRANTY.
 */
 
 #include "stdafx.h"
+#include <Windows.h>
+#include <chrono>
 #include <iostream>
 #include "Dependencies\glew.h"
 #include "Dependencies\freeglut.h"
@@ -19,26 +21,26 @@ but WITHOUT ANY WARRANTY.
 using namespace std;
 
 Renderer *g_Renderer = NULL;
-Object g_Object(50, 50, 0, 20, 1, 0, 0, 1);
+
 SceneMgr* g_SceneMgr = NULL;
+
+DWORD g_start = 0;
 
 void RenderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
 
-	// Renderer Test
-	g_Renderer->DrawSolidRect(0, 0, 0, 4, 1, 0, 1, 1);
-	g_SceneMgr->Update();
+	DWORD CurTime = timeGetTime();
+	DWORD ETime = CurTime - g_start;
+	g_start = CurTime;
+
+	
+	g_SceneMgr->Update(ETime);
 	g_SceneMgr->Collision();
 	g_SceneMgr->DrawAll();
-
-	/*g_Renderer->DrawSolidRect(g_Object.getPosX(), g_Object.getPosY(), g_Object.getPosZ(), g_Object.getPosSize(),
-		g_Object.getPosR(), g_Object.getPosG(), g_Object.getPosB(), g_Object.getPosA());
-*/
-	//g_Object.Update();
 	
-	//cout << g_Object.getPosX() << " " << g_Object.getPosY() << endl;
+
 	glutSwapBuffers();
 }
 
@@ -51,8 +53,10 @@ void MouseInput(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
 	{
-		g_Object.setPosX(x - 250);
-		g_Object.setPosY(-y + 250);
+		g_SceneMgr->CreateRect(x - 250, -y + 250);
+
+		/*g_Object.setPosX(x - 250);
+		g_Object.setPosY(-y + 250);*/
 		cout << "Å¬¸¯" << endl;
 	}
 	RenderScene();
@@ -88,15 +92,12 @@ int main(int argc, char **argv)
 		std::cout << "GLEW 3.0 not supported\n ";
 	}
 
-	// Initialize Renderer
-	g_Renderer = new Renderer(500, 500);
 	g_SceneMgr = new SceneMgr;
-	/*if (!g_Renderer->IsInitialized())
-	{
-		std::cout << "Renderer could not be initialized.. \n";
-	}*/
+
 	
+
 	glutDisplayFunc(RenderScene);
+	
 	glutIdleFunc(Idle);
 	glutKeyboardFunc(KeyInput);
 	glutMouseFunc(MouseInput);

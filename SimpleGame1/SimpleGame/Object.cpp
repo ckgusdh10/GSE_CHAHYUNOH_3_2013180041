@@ -123,10 +123,10 @@ void Object::setDirY(int dirY)
 	m_dirY = dirY;
 }
 
-void Object::Update()
+void Object::Update(float E_Time)
 {
-	m_x = m_x + (m_dirX * 0.1);
-	m_y = m_y + (m_dirY * 0.1);
+	m_x = m_x + (m_dirX * E_Time );
+	m_y = m_y + (m_dirY * E_Time );
 	if (m_y >= 250 && m_x >= 250)
 	{
 		m_dirY = -m_dirY;

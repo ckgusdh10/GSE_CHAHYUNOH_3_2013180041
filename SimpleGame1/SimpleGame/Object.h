@@ -44,6 +44,6 @@ public:
 	void setDirX(int dirX);
 	void setDirY(int dirY);
 
-	void Update();
+	void Update(float E_Time);
 	
 };

@@ -73,6 +73,16 @@ float Object::getPosA()
 	return m_a;
 }
 
+float Object::getLife()
+{
+	return m_life;
+}
+
+float Object::getLifeTime()
+{
+	return m_lifetime;
+}
+
 void Object::setPosX(float x)
 {
 	m_x = x;
@@ -125,44 +135,53 @@ void Object::setDirY(int dirY)
 
 void Object::Update(float E_Time)
 {
-	m_x = m_x + (m_dirX * E_Time );
-	m_y = m_y + (m_dirY * E_Time );
-	if (m_y >= 250 && m_x >= 250)
+	
+
+	m_x = m_x + m_dirX * E_Time * 0.5;
+	m_y = m_y + m_dirY * E_Time * 0.5;
+	
+	if (m_lifetime >= 0)
+	{
+		m_lifetime -= E_Time * 0.5;
+	}
+
+	/*if (m_y >= 250 && m_x >= 250)
 	{
 		m_dirY = -m_dirY;
 		m_dirX = -m_dirX;
 	}
-	else if (m_y <= -250 && m_x >= 250)
+	if (m_y <= -250 && m_x >= 250)
 	{
 		m_dirY = -m_dirY;
 		m_dirX = -m_dirX;
 	}
-	else if (m_y <= -250 && m_x <= -250)
+	if (m_y <= -250 && m_x <= -250)
 	{
 		m_dirY = -m_dirY;
 		m_dirX = -m_dirX;
 	}
-	else if (m_y >= 250 && m_x <= -250)
+	if (m_y >= 250 && m_x <= -250)
 	{
 		m_dirY = -m_dirY;
 		m_dirX = -m_dirX;
-	}
-	else if (m_y >= 250)
+	}*/
+	if (m_y > 250)
 	{
 		m_dirY = -m_dirY;
 	}
-	else if(m_x >= 250)
+	if(m_x > 250)
 	{
 		m_dirX = -m_dirX;
 	}
-	else if (m_y <= -250)
+	if (m_y < -250)
 	{
 		m_dirY = -m_dirY;
 	}
-	else if(m_x <= -250)
+	if(m_x < -250)
 	{
 		m_dirX = -m_dirX;
 	}
+	
 }
 
 

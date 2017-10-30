@@ -22,6 +22,6 @@ public:
 	void Update(float E_Time);
 	void Collision();
 	void CreateRect(float x, float y);
-
+	bool CheckLifeTime(Object* o);
 	int CurrentRectCount = 0;
 };

@@ -15,10 +15,12 @@ class Object {
 	float m_b;
 	float m_a;
 	float m_speed;
-
+	
 	float m_dirX = 1;
 	float m_dirY = 1;
 
+	float m_life = 100;
+	float m_lifetime = 100;
 public:
 	Object();
 	Object(float x, float y, float z, float size, float r, float g, float b, float a);
@@ -32,6 +34,8 @@ public:
 	float getPosG();
 	float getPosB();
 	float getPosA();
+	float getLife();
+	float getLifeTime();
 
 	void setPosX(float x);
 	void setPosY(float y);

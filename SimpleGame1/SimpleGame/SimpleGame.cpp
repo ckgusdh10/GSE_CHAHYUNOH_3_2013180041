@@ -24,19 +24,19 @@ Renderer *g_Renderer = NULL;
 
 SceneMgr* g_SceneMgr = NULL;
 
-DWORD g_start = 0;
+auto g_start = 0;
 
 void RenderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
 
-	DWORD CurTime = timeGetTime();
-	DWORD ETime = CurTime - g_start;
+	auto CurTime = timeGetTime();
+	auto ETime = CurTime - g_start;
 	g_start = CurTime;
 
 	
-	g_SceneMgr->Update(ETime);
+	g_SceneMgr->Update((float)ETime);
 	g_SceneMgr->Collision();
 	g_SceneMgr->DrawAll();
 	
@@ -92,20 +92,18 @@ int main(int argc, char **argv)
 		std::cout << "GLEW 3.0 not supported\n ";
 	}
 
-	g_SceneMgr = new SceneMgr;
-
-	
-
 	glutDisplayFunc(RenderScene);
 	
 	glutIdleFunc(Idle);
 	glutKeyboardFunc(KeyInput);
 	glutMouseFunc(MouseInput);
 	glutSpecialFunc(SpecialKeyInput);
+	g_SceneMgr = new SceneMgr;
 
+	g_start = timeGetTime();
 	glutMainLoop();
 	
-	//delete g_Renderer;
+	delete g_SceneMgr;
 
     return 0;
 }

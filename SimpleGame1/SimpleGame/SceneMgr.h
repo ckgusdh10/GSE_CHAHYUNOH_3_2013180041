@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include <random>
 
-#define MAX_OBJECTS_COUNT 10
+#define MAX_OBJECTS_COUNT 500
 
 
 
@@ -21,7 +21,10 @@ public:
 	void DrawAll();
 	void Update(float E_Time);
 	void Collision();
-	void CreateRect(float x, float y);
+	void CreateRect(float x, float y, int type);
 	bool CheckLifeTime(Object* o);
+	bool CheckLife(Object* o);
 	int CurrentRectCount = 0;
+
+	void CreateBullet(float E_Time);
 };

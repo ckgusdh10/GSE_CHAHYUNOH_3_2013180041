@@ -15,12 +15,14 @@ class Object {
 	float m_b;
 	float m_a;
 	float m_speed;
-	
+	int m_type;
+	float accumETime;
+
 	float m_dirX = 1;
 	float m_dirY = 1;
 
-	float m_life = 100;
-	float m_lifetime = 100;
+	float m_life;
+	float m_lifetime = 1000000;
 public:
 	Object();
 	Object(float x, float y, float z, float size, float r, float g, float b, float a);
@@ -36,6 +38,7 @@ public:
 	float getPosA();
 	float getLife();
 	float getLifeTime();
+	int getType();
 
 	void setPosX(float x);
 	void setPosY(float y);
@@ -47,6 +50,9 @@ public:
 	void setColorA(float a);
 	void setDirX(int dirX);
 	void setDirY(int dirY);
+	void setType(int type);
+	void setLife(int life);
+	void setSpeed(float speed);
 
 	void Update(float E_Time);
 	

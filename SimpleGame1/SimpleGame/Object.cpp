@@ -89,6 +89,11 @@ int Object::getType()
 	return m_type;
 }
 
+float Object::getAccumTime()
+{
+	return accumETime;
+}
+
 void Object::setPosX(float x)
 {
 	m_x = x;
@@ -154,9 +159,19 @@ void Object::setSpeed(float speed)
 	m_speed = speed;
 }
 
+void Object::setAccumTime(float accumTime)
+{
+	accumETime = accumTime;
+}
+
 void Object::Update(float E_Time)
 {
-	
+	accumETime += E_Time * 0.001;
+	/*if (accumETime >= 0.5)
+	{
+		
+		accumETime = 0;
+	}*/
 
 	m_x = m_x + m_dirX * m_speed * E_Time * 0.001;
 	m_y = m_y + m_dirY * m_speed * E_Time * 0.001;
@@ -203,6 +218,16 @@ void Object::Update(float E_Time)
 		m_dirX = -m_dirX;
 	}
 	
+}
+
+void Object::BulletUpdate(float E_Time)
+{
+	m_x = m_x + m_dirX * m_speed * E_Time * 0.001;
+	m_y = m_y + m_dirY * m_speed * E_Time * 0.001;
+	if (m_lifetime >= 0)
+	{
+		m_lifetime -= 0.5;
+	}
 }
 
 

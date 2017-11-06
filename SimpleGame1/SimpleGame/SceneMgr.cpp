@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <Windows.h>
 #include "SceneMgr.h"
 
 SceneMgr::SceneMgr()
@@ -65,11 +66,31 @@ void SceneMgr::Update(float E_Time)
 				--CurrentRectCount;
 			}
 			else
-				m_objects[i]->Update(E_Time);
+			{
+				if (m_objects[i]->getType() == 3)
+					m_objects[i]->BulletUpdate(E_Time);
+				else
+					m_objects[i]->Update(E_Time);
+			}
+
+
+			
 
 		}
+		
 	}
-	
+	for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
+	{
+		if (m_objects[i] != NULL && m_objects[i]->getType() == 1) 
+		{
+			if (m_objects[i]->getAccumTime() >= 0.5)
+			{
+				CreateRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), 3);
+				cout << m_objects[i]->getAccumTime() << endl;
+				m_objects[i]->setAccumTime(0);
+			}
+		}
+	}
 	
 }
 
@@ -90,20 +111,35 @@ void SceneMgr::Collision()
 						&& m_objects[j]->getPosX() + m_objects[j]->getPosSize() / 2 >= m_objects[i]->getPosX() - m_objects[i]->getPosSize() / 2
 						&& m_objects[j]->getPosY() + m_objects[j]->getPosSize() / 2 >= m_objects[i]->getPosY() - m_objects[i]->getPosSize() / 2)
 					{
+						
 						if (m_objects[i]->getType() == 1 && m_objects[j]->getType() == 2)
 						{
-
-							/*m_objects[i]->setColorG(0.0f);
-							m_objects[i]->setColorB(0.0f);*/
+							m_objects[i]->setColorR(1.0f);
+							m_objects[i]->setColorG(0.0f);
+							m_objects[i]->setColorB(0.0f);
+	
 							m_objects[i]->setLife(m_objects[i]->getLife() - m_objects[j]->getLife());
 							delete m_objects[j];
 							m_objects[j] = NULL;
 						}
 						else if (m_objects[i]->getType() == 2 && m_objects[j]->getType() == 1)
 						{
-
-							/*m_objects[j]->setColorG(0.0f);
-							m_objects[j]->setColorB(0.0f);*/
+							m_objects[j]->setColorR(1.0f);
+							m_objects[j]->setColorG(0.0f);
+							m_objects[j]->setColorB(0.0f);
+							m_objects[j]->setLife(m_objects[j]->getLife() - m_objects[i]->getLife());
+							delete m_objects[i];
+							m_objects[i] = NULL;
+							
+						}
+						else if (m_objects[i]->getType() == 2 && m_objects[j]->getType() == 3)
+						{
+							m_objects[i]->setLife(m_objects[i]->getLife() - m_objects[j]->getLife());
+							delete m_objects[j];
+							m_objects[j] = NULL;
+						}
+						else if (m_objects[i]->getType() == 3 && m_objects[j]->getType() == 2)
+						{
 							m_objects[j]->setLife(m_objects[j]->getLife() - m_objects[i]->getLife());
 							delete m_objects[i];
 							m_objects[i] = NULL;
@@ -112,29 +148,57 @@ void SceneMgr::Collision()
 						m_objects[i]->setColorB(0.0f);
 						m_objects[j]->setColorG(0.0f);
 						m_objects[j]->setColorB(0.0f);*/
+						/*else
+						{
+							if (m_objects[i]->getType() == 1)
+							{
+								m_objects[i]->setColorG(1.0f);
+								m_objects[i]->setColorR(1.0f);
+								m_objects[i]->setColorB(0.0f);
+								break;
+							}
+							m_objects[i]->setColorR(1.0f);
+							m_objects[i]->setColorG(1.0f);
+							m_objects[i]->setColorB(1.0f);
+						}*/
+						
 						break;
 					}
 					
-					else
+					//else
+					//{
+					else if (m_objects[i]->getType() == 1)
 					{
-						if (m_objects[i]->getType() == 1)
+						
 						{
 							m_objects[i]->setColorG(1.0f);
 							m_objects[i]->setColorR(1.0f);
 							m_objects[i]->setColorB(0.0f);
 							break;
 						}
-						m_objects[i]->setColorG(1.0f);
-						m_objects[i]->setColorB(1.0f);
-						/*m_objects[j]->setColorG(1.0f);
-						m_objects[j]->setColorB(1.0f);*/
+						
+						m_objects[j]->setColorG(1.0f);
+						m_objects[j]->setColorB(1.0f);
+						//}
 					}
 				}
 
 			}
 		}
+
 	}
-	
+	for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
+	{
+		if (m_objects[i] != NULL)
+		{
+			if (m_objects[i]->getType() == 1)
+			{
+				m_objects[i]->setColorR(1.0f);
+				m_objects[i]->setColorG(1.0f);
+				m_objects[i]->setColorB(0.0f);
+			}
+		}
+	}
 }
 
 void SceneMgr::CreateRect(float x, float y, int type)

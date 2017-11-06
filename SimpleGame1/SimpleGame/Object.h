@@ -39,6 +39,7 @@ public:
 	float getLife();
 	float getLifeTime();
 	int getType();
+	float getAccumTime();
 
 	void setPosX(float x);
 	void setPosY(float y);
@@ -53,7 +54,8 @@ public:
 	void setType(int type);
 	void setLife(int life);
 	void setSpeed(float speed);
+	void setAccumTime(float accumTime);
 
 	void Update(float E_Time);
-	
+	void BulletUpdate(float E_Time);
 };

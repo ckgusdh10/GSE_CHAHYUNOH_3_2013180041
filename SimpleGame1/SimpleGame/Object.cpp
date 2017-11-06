@@ -134,12 +134,12 @@ void Object::setColorA(float a)
 	m_a = a;
 }
 
-void Object::setDirX(int dirX)
+void Object::setDirX(float dirX)
 {
 	m_dirX = dirX;
 }
 
-void Object::setDirY(int dirY)
+void Object::setDirY(float dirY)
 {
 	m_dirY = dirY;
 }
@@ -167,11 +167,6 @@ void Object::setAccumTime(float accumTime)
 void Object::Update(float E_Time)
 {
 	accumETime += E_Time * 0.001;
-	/*if (accumETime >= 0.5)
-	{
-		
-		accumETime = 0;
-	}*/
 
 	m_x = m_x + m_dirX * m_speed * E_Time * 0.001;
 	m_y = m_y + m_dirY * m_speed * E_Time * 0.001;

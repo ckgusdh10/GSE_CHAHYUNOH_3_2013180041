@@ -85,6 +85,12 @@ void SceneMgr::Update(float E_Time)
 		{
 			if (m_objects[i]->getAccumTime() >= 0.5)
 			{
+				if (m_objects[i]->getType() == 1)
+				{
+					m_objects[i]->setColorR(1.0f);
+					m_objects[i]->setColorG(1.0f);
+					m_objects[i]->setColorB(0.0f);
+				}
 				CreateRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), 3);
 				cout << m_objects[i]->getAccumTime() << endl;
 				m_objects[i]->setAccumTime(0);
@@ -171,14 +177,14 @@ void SceneMgr::Collision()
 					{
 						
 						{
-							m_objects[i]->setColorG(1.0f);
+							/*m_objects[i]->setColorG(1.0f);
 							m_objects[i]->setColorR(1.0f);
-							m_objects[i]->setColorB(0.0f);
+							m_objects[i]->setColorB(0.0f);*/
 							break;
 						}
 						
-						m_objects[j]->setColorG(1.0f);
-						m_objects[j]->setColorB(1.0f);
+						/*m_objects[j]->setColorG(1.0f);
+						m_objects[j]->setColorB(1.0f);*/
 						//}
 					}
 				}
@@ -187,7 +193,7 @@ void SceneMgr::Collision()
 		}
 
 	}
-	for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
+	/*for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
 	{
 		if (m_objects[i] != NULL)
 		{
@@ -198,7 +204,7 @@ void SceneMgr::Collision()
 				m_objects[i]->setColorB(0.0f);
 			}
 		}
-	}
+	}*/
 }
 
 void SceneMgr::CreateRect(float x, float y, int type)
@@ -249,14 +255,16 @@ void SceneMgr::CreateRect(float x, float y, int type)
 					m_objects[i]->setLife(10);
 					m_objects[i]->setType(2);
 					m_objects[i]->setSpeed(300);
-					if (rand() % 2 == 0)
+					m_objects[i]->setDirX(rand() % 20 * 0.1 - 1);
+					m_objects[i]->setDirY(rand() % 20 * 0.1 - 1);
+					/*if (rand() % 2 == 0)
 						m_objects[i]->setDirX(1);
 					else
 						m_objects[i]->setDirX(-1);
 					if (rand() % 2 == 0)
 						m_objects[i]->setDirY(1);
 					else
-						m_objects[i]->setDirY(-1);
+						m_objects[i]->setDirY(-1);*/
 					++CurrentRectCount;
 					break;
 				}
@@ -275,14 +283,9 @@ void SceneMgr::CreateRect(float x, float y, int type)
 					m_objects[i]->setLife(20);
 					m_objects[i]->setType(3);
 					m_objects[i]->setSpeed(600);
-					if (rand() % 2 == 0)
-						m_objects[i]->setDirX(1);
-					else
-						m_objects[i]->setDirX(-1);
-					if (rand() % 2 == 0)
-						m_objects[i]->setDirY(1);
-					else
-						m_objects[i]->setDirY(-1);
+					m_objects[i]->setDirX(rand()% 20 * 0.1 - 1);
+					m_objects[i]->setDirY(rand()% 20 * 0.1 - 1);
+					
 					++CurrentRectCount;
 					break;
 				}

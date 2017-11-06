@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "Renderer.h"
-#include <time.h>
+
 
 
 
@@ -49,8 +49,8 @@ public:
 	void setColorG(float green);
 	void setColorB(float blue);
 	void setColorA(float a);
-	void setDirX(int dirX);
-	void setDirY(int dirY);
+	void setDirX(float dirX);
+	void setDirY(float dirY);
 	void setType(int type);
 	void setLife(int life);
 	void setSpeed(float speed);

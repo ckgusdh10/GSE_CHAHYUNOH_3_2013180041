@@ -11,26 +11,7 @@ SceneMgr::SceneMgr()
 		m_objects[i] = NULL;
 	}
 	CreateRect(0, 0, 1);
-	/*for (int i = 0; i < 50; ++i)
-	{
-		m_objects[i] = new Object;
-		m_objects[i]->setPosX((rand() % 500) - 250);
-		m_objects[i]->setPosY((rand() % 500) - 250);
-		m_objects[i]->setPosZ(0);
-		m_objects[i]->setSize(20);
-		m_objects[i]->setColorR(1.0f);
-		m_objects[i]->setColorG(1.0f);
-		m_objects[i]->setColorB(1.0f);
-		m_objects[i]->setColorA(1.0f);
-		if (rand() % 2 == 0)
-			m_objects[i]->setDirX(1);
-		else
-			m_objects[i]->setDirX(-1);
-		if (rand() % 2 == 0)
-			m_objects[i]->setDirY(1);
-		else
-			m_objects[i]->setDirY(-1);
-	}*/
+	
 }
 
 SceneMgr::~SceneMgr()
@@ -150,61 +131,17 @@ void SceneMgr::Collision()
 							delete m_objects[i];
 							m_objects[i] = NULL;
 						}
-						/*m_objects[i]->setColorG(0.0f);
-						m_objects[i]->setColorB(0.0f);
-						m_objects[j]->setColorG(0.0f);
-						m_objects[j]->setColorB(0.0f);*/
-						/*else
-						{
-							if (m_objects[i]->getType() == 1)
-							{
-								m_objects[i]->setColorG(1.0f);
-								m_objects[i]->setColorR(1.0f);
-								m_objects[i]->setColorB(0.0f);
-								break;
-							}
-							m_objects[i]->setColorR(1.0f);
-							m_objects[i]->setColorG(1.0f);
-							m_objects[i]->setColorB(1.0f);
-						}*/
 						
 						break;
 					}
-					
-					//else
-					//{
-					else if (m_objects[i]->getType() == 1)
-					{
-						
-						{
-							/*m_objects[i]->setColorG(1.0f);
-							m_objects[i]->setColorR(1.0f);
-							m_objects[i]->setColorB(0.0f);*/
-							break;
-						}
-						
-						/*m_objects[j]->setColorG(1.0f);
-						m_objects[j]->setColorB(1.0f);*/
-						//}
-					}
+				
 				}
 
 			}
 		}
 
 	}
-	/*for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
-	{
-		if (m_objects[i] != NULL)
-		{
-			if (m_objects[i]->getType() == 1)
-			{
-				m_objects[i]->setColorR(1.0f);
-				m_objects[i]->setColorG(1.0f);
-				m_objects[i]->setColorB(0.0f);
-			}
-		}
-	}*/
+	
 }
 
 void SceneMgr::CreateRect(float x, float y, int type)
@@ -217,7 +154,7 @@ void SceneMgr::CreateRect(float x, float y, int type)
 			{
 				if (type == 1)
 				{
-					cout << "持失 " << endl;
+					//cout << "持失 " << endl;
 					m_objects[i] = new Object;
 					m_objects[i]->setPosX(x);
 					m_objects[i]->setPosY(y);
@@ -242,7 +179,7 @@ void SceneMgr::CreateRect(float x, float y, int type)
 				}
 				else if (type == 2)
 				{
-					cout << "持失 " << endl;
+					//cout << "持失 " << endl;
 					m_objects[i] = new Object;
 					m_objects[i]->setPosX(x);
 					m_objects[i]->setPosY(y);
@@ -257,20 +194,13 @@ void SceneMgr::CreateRect(float x, float y, int type)
 					m_objects[i]->setSpeed(300);
 					m_objects[i]->setDirX(rand() % 20 * 0.1 - 1);
 					m_objects[i]->setDirY(rand() % 20 * 0.1 - 1);
-					/*if (rand() % 2 == 0)
-						m_objects[i]->setDirX(1);
-					else
-						m_objects[i]->setDirX(-1);
-					if (rand() % 2 == 0)
-						m_objects[i]->setDirY(1);
-					else
-						m_objects[i]->setDirY(-1);*/
+					
 					++CurrentRectCount;
 					break;
 				}
 				else if (type == 3)
 				{
-					cout << "持失 " << endl;
+					//cout << "持失 " << endl;
 					m_objects[i] = new Object;
 					m_objects[i]->setPosX(x);
 					m_objects[i]->setPosY(y);
@@ -291,7 +221,7 @@ void SceneMgr::CreateRect(float x, float y, int type)
 				}
 				else if (type == 4)
 				{
-					cout << "持失 " << endl;
+					//cout << "持失 " << endl;
 					m_objects[i] = new Object;
 					m_objects[i]->setPosX(x);
 					m_objects[i]->setPosY(y);

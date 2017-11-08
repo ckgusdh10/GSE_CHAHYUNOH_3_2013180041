@@ -55,9 +55,6 @@ void MouseInput(int button, int state, int x, int y)
 	{
 		g_SceneMgr->CreateRect(x - 250, -y + 250, 2);
 
-		/*g_Object.setPosX(x - 250);
-		g_Object.setPosY(-y + 250);*/
-		cout << "Å¬¸¯" << endl;
 	}
 	RenderScene();
 }

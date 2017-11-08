@@ -176,26 +176,7 @@ void Object::Update(float E_Time)
 		m_lifetime -= 0.5;
 	}
 
-	/*if (m_y >= 250 && m_x >= 250)
-	{
-		m_dirY = -m_dirY;
-		m_dirX = -m_dirX;
-	}
-	if (m_y <= -250 && m_x >= 250)
-	{
-		m_dirY = -m_dirY;
-		m_dirX = -m_dirX;
-	}
-	if (m_y <= -250 && m_x <= -250)
-	{
-		m_dirY = -m_dirY;
-		m_dirX = -m_dirX;
-	}
-	if (m_y >= 250 && m_x <= -250)
-	{
-		m_dirY = -m_dirY;
-		m_dirX = -m_dirX;
-	}*/
+		
 	if (m_y > 250)
 	{
 		m_dirY = -m_dirY;

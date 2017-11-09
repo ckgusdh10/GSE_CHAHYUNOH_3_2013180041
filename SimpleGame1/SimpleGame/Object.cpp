@@ -94,6 +94,11 @@ float Object::getAccumTime()
 	return accumETime;
 }
 
+int Object::getArr()
+{
+	return arr;
+}
+
 void Object::setPosX(float x)
 {
 	m_x = x;
@@ -162,6 +167,11 @@ void Object::setSpeed(float speed)
 void Object::setAccumTime(float accumTime)
 {
 	accumETime = accumTime;
+}
+
+void Object::setArr(int arr)
+{
+	arr = arr;
 }
 
 void Object::Update(float E_Time)

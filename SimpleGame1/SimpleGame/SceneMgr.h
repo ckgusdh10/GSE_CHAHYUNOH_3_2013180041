@@ -11,7 +11,7 @@ class SceneMgr {
 private:
 	Renderer *m_Renderer;
 	Object* m_objects[MAX_OBJECTS_COUNT];
-	
+	GLint m_texCharacter;
 
 
 public:
@@ -21,7 +21,7 @@ public:
 	void DrawAll();
 	void Update(float E_Time);
 	void Collision();
-	void CreateRect(float x, float y, int type);
+	void CreateRect(float x, float y, int type, int arr);
 	bool CheckLifeTime(Object* o);
 	bool CheckLife(Object* o);
 	int CurrentRectCount = 0;

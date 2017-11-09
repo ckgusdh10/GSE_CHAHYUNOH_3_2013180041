@@ -53,7 +53,7 @@ void MouseInput(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
 	{
-		g_SceneMgr->CreateRect(x - 250, -y + 250, 2);
+		g_SceneMgr->CreateRect(x - 250, -y + 250, 2, 0);
 
 	}
 	RenderScene();

@@ -5,12 +5,13 @@
 SceneMgr::SceneMgr()
 {
 	m_Renderer = new Renderer(500, 500);
-
+	m_texCharacter = m_Renderer->CreatePngTexture("./resourse/È°Â¦.png");
 	for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
 	{
 		m_objects[i] = NULL;
 	}
-	CreateRect(0, 0, 1);
+	
+	CreateRect(0, 0, 1, 0);
 	
 }
 
@@ -21,7 +22,7 @@ SceneMgr::~SceneMgr()
 
 void SceneMgr::DrawAll()
 {
-
+	
 	for(int i = 0;i<MAX_OBJECTS_COUNT;++i)
 	{ 
 		if (m_objects[i] != NULL)
@@ -31,11 +32,13 @@ void SceneMgr::DrawAll()
 		}
 
 	}
+	m_Renderer->DrawTexturedRect(0, 0, 0, 50, 1, 0, 0, 1, m_texCharacter);
 }
 
 
 void SceneMgr::Update(float E_Time)
 {
+
 	for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
 	{
 		if (m_objects[i] != NULL)
@@ -72,12 +75,23 @@ void SceneMgr::Update(float E_Time)
 					m_objects[i]->setColorG(1.0f);
 					m_objects[i]->setColorB(0.0f);
 				}
-				CreateRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), 3);
+				CreateRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), 3, i);
 				cout << m_objects[i]->getAccumTime() << endl;
 				m_objects[i]->setAccumTime(0);
 			}
 		}
+		else if (m_objects[i] != NULL && m_objects[i]->getType() == 2)
+		{
+			if (m_objects[i]->getAccumTime() >= 0.5)
+			{
+				CreateRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), 4, i);
+				cout << m_objects[i]->getAccumTime() << endl;
+				m_objects[i]->setAccumTime(0);
+			}
+		}
+		
 	}
+	
 	
 }
 
@@ -132,6 +146,25 @@ void SceneMgr::Collision()
 							m_objects[i] = NULL;
 						}
 						
+						else if (m_objects[i]->getType() == 1 && m_objects[j]->getType() == 4)
+						{
+							m_objects[i]->setColorR(1.0f);
+							m_objects[i]->setColorG(0.0f);
+							m_objects[i]->setColorB(0.0f);
+							m_objects[i]->setLife(m_objects[i]->getLife() - m_objects[j]->getLife());
+							delete m_objects[j];
+							m_objects[j] = NULL;
+						}
+						else if (m_objects[i]->getType() == 2 && m_objects[j]->getType() == 4)
+						{
+							if (i != m_objects[j]->getArr())
+							{
+								m_objects[i]->setLife(m_objects[i]->getLife() - m_objects[j]->getLife());
+								delete m_objects[j];
+								m_objects[j] = NULL;
+							}
+						}
+						
 						break;
 					}
 				
@@ -144,7 +177,7 @@ void SceneMgr::Collision()
 	
 }
 
-void SceneMgr::CreateRect(float x, float y, int type)
+void SceneMgr::CreateRect(float x, float y, int type, int arr)
 {
 	if (CurrentRectCount < MAX_OBJECTS_COUNT)
 	{
@@ -154,6 +187,7 @@ void SceneMgr::CreateRect(float x, float y, int type)
 			{
 				if (type == 1)
 				{
+				
 					//cout << "»ý¼º " << endl;
 					m_objects[i] = new Object;
 					m_objects[i]->setPosX(x);
@@ -234,14 +268,9 @@ void SceneMgr::CreateRect(float x, float y, int type)
 					m_objects[i]->setLife(10);
 					m_objects[i]->setType(4);
 					m_objects[i]->setSpeed(100);
-					if (rand() % 2 == 0)
-						m_objects[i]->setDirX(1);
-					else
-						m_objects[i]->setDirX(-1);
-					if (rand() % 2 == 0)
-						m_objects[i]->setDirY(1);
-					else
-						m_objects[i]->setDirY(-1);
+					m_objects[i]->setDirX(rand() % 20 * 0.1 - 1);
+					m_objects[i]->setDirY(rand() % 20 * 0.1 - 1);
+					m_objects[i]->setArr(arr);
 					++CurrentRectCount;
 					break;
 				}
@@ -273,7 +302,7 @@ void SceneMgr::CreateBullet(float E_Time)
 	{
 		if (m_objects[i]->getType() == 1)
 		{
-			CreateRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), 3);
+			CreateRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), 3, i);
 		}
 	}
 }

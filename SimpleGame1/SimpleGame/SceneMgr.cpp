@@ -5,7 +5,7 @@
 SceneMgr::SceneMgr()
 {
 	m_Renderer = new Renderer(500, 500);
-	m_texCharacter = m_Renderer->CreatePngTexture("./resourse/»∞¬¶.png");
+	m_texCharacter = m_Renderer->CreatePngTexture("./resourse/ø°∆Á≈æ.png");
 	for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
 	{
 		m_objects[i] = NULL;
@@ -27,12 +27,20 @@ void SceneMgr::DrawAll()
 	{ 
 		if (m_objects[i] != NULL)
 		{
-			m_Renderer->DrawSolidRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(),
-				m_objects[i]->getPosR(), m_objects[i]->getPosG(), m_objects[i]->getPosB(), m_objects[i]->getPosA());
+			if (m_objects[i]->getType() == 1)
+			{
+				m_Renderer->DrawTexturedRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(), m_objects[i]->getPosR(), m_objects[i]->getPosG(), m_objects[i]->getPosB(), m_objects[i]->getPosA(), m_texCharacter);
+			}
+			else
+			{
+				m_Renderer->DrawSolidRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(),
+					m_objects[i]->getPosR(), m_objects[i]->getPosG(), m_objects[i]->getPosB(), m_objects[i]->getPosA());
+			}
 		}
 
 	}
-	m_Renderer->DrawTexturedRect(0, 0, 0, 50, 1, 0, 0, 1, m_texCharacter);
+	
+	
 }
 
 
@@ -157,8 +165,10 @@ void SceneMgr::Collision()
 						}
 						else if (m_objects[i]->getType() == 2 && m_objects[j]->getType() == 4)
 						{
+							
 							if (i != m_objects[j]->getArr())
 							{
+							
 								m_objects[i]->setLife(m_objects[i]->getLife() - m_objects[j]->getLife());
 								delete m_objects[j];
 								m_objects[j] = NULL;

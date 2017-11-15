@@ -24,7 +24,7 @@ class Object {
 	float m_life;
 	float m_lifetime = 1000000;
 
-	int arr;
+	int arr = -1;
 public:
 	Object();
 	Object(float x, float y, float z, float size, float r, float g, float b, float a);

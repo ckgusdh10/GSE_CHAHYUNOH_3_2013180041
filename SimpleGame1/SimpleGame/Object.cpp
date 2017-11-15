@@ -169,9 +169,9 @@ void Object::setAccumTime(float accumTime)
 	accumETime = accumTime;
 }
 
-void Object::setArr(int arr)
+void Object::setArr(int Arr)
 {
-	arr = arr;
+	arr = Arr;
 }
 
 void Object::Update(float E_Time)

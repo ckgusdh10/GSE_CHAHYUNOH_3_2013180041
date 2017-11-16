@@ -25,6 +25,9 @@ class Object {
 	float m_lifetime = 1000000;
 
 	int arr = -1;
+
+	int team = 0;
+
 public:
 	Object();
 	Object(float x, float y, float z, float size, float r, float g, float b, float a);
@@ -43,6 +46,7 @@ public:
 	int getType();
 	float getAccumTime();
 	int getArr();
+	int getTeam();
 
 	void setPosX(float x);
 	void setPosY(float y);
@@ -59,6 +63,7 @@ public:
 	void setSpeed(float speed);
 	void setAccumTime(float accumTime);
 	void setArr(int arr);
+	void setTeam(int t);
 
 	void Update(float E_Time);
 	void BulletUpdate(float E_Time);

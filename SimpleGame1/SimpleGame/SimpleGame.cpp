@@ -25,6 +25,8 @@ Renderer *g_Renderer = NULL;
 SceneMgr* g_SceneMgr = NULL;
 
 auto g_start = 0;
+float CharacterCool = 0;
+bool CharacterRespawn = true;
 
 void RenderScene(void)
 {
@@ -35,7 +37,13 @@ void RenderScene(void)
 	auto ETime = CurTime - g_start;
 	g_start = CurTime;
 
+	CharacterCool += ETime * 0.001;
+	if (CharacterCool >= 7)
+	{
+		CharacterRespawn = true;
+	}
 	
+
 	g_SceneMgr->Update((float)ETime);
 	g_SceneMgr->Collision();
 	g_SceneMgr->DrawAll();
@@ -51,9 +59,16 @@ void Idle(void)
 
 void MouseInput(int button, int state, int x, int y)
 {
+	
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
 	{
-		g_SceneMgr->CreateRect(x - 250, -y + 250, 2, 0);
+		if (CharacterRespawn == true)
+		{
+			g_SceneMgr->CreateRect(x - 250, -y + 400, 2, 0, 2);
+			CharacterRespawn = false;
+			CharacterCool = 0;
+		}
+			
 
 	}
 	RenderScene();
@@ -76,7 +91,7 @@ int main(int argc, char **argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(0, 0);
-	glutInitWindowSize(500, 500);
+	glutInitWindowSize(500, 800);
 	glutCreateWindow("Game Software Engineering KPU");
 
 	glewInit();

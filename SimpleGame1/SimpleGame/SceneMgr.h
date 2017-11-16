@@ -12,7 +12,11 @@ private:
 	Renderer *m_Renderer;
 	Object* m_objects[MAX_OBJECTS_COUNT];
 	GLint m_texCharacter;
-
+	GLint m_texCharacter2;
+	
+	float accuTime = 0;
+	float CharacterCool = 0;
+	bool CharacterRespawn = true;
 
 public:
 	SceneMgr();
@@ -21,7 +25,7 @@ public:
 	void DrawAll();
 	void Update(float E_Time);
 	void Collision();
-	void CreateRect(float x, float y, int type, int arr);
+	void CreateRect(float x, float y, int type, int arr, int team);
 	bool CheckLifeTime(Object* o);
 	bool CheckLife(Object* o);
 	int CurrentRectCount = 0;

@@ -99,6 +99,11 @@ int Object::getArr()
 	return arr;
 }
 
+int Object::getTeam()
+{
+	return team;
+}
+
 void Object::setPosX(float x)
 {
 	m_x = x;
@@ -174,6 +179,11 @@ void Object::setArr(int Arr)
 	arr = Arr;
 }
 
+void Object::setTeam(int t)
+{
+	team = t;
+}
+
 void Object::Update(float E_Time)
 {
 	accumETime += E_Time * 0.001;
@@ -187,7 +197,7 @@ void Object::Update(float E_Time)
 	}
 
 		
-	if (m_y > 250)
+	if (m_y > 400)
 	{
 		m_dirY = -m_dirY;
 	}
@@ -195,7 +205,7 @@ void Object::Update(float E_Time)
 	{
 		m_dirX = -m_dirX;
 	}
-	if (m_y < -250)
+	if (m_y < -400)
 	{
 		m_dirY = -m_dirY;
 	}

@@ -202,6 +202,14 @@ void SceneMgr::Collision()
 									m_objects[j] = NULL;
 								}
 							}
+							else if (m_objects[i]->getType() == 1 && m_objects[j]->getType() == 3)
+							{
+								
+								m_objects[i]->setLife(m_objects[i]->getLife() - m_objects[j]->getLife());
+								delete m_objects[j];
+								m_objects[j] = NULL;
+								
+							}
 						}
 						break;
 					}

@@ -64,9 +64,14 @@ void MouseInput(int button, int state, int x, int y)
 	{
 		if (CharacterRespawn == true)
 		{
-			g_SceneMgr->CreateRect(x - 250, -y + 400, 2, 0, 2);
-			CharacterRespawn = false;
-			CharacterCool = 0;
+			if (y > 400)
+			{
+				cout << x << "\t" << y << endl;
+				g_SceneMgr->CreateRect(x - 250, -y + 400, 2, 0, 2);
+				CharacterRespawn = false;
+				CharacterCool = 0;
+			}
+			
 		}
 			
 

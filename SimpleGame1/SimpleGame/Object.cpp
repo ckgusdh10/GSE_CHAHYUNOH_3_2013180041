@@ -104,6 +104,16 @@ int Object::getTeam()
 	return team;
 }
 
+int Object::getLevel()
+{
+	return level;
+}
+
+int Object::getmaxLife()
+{
+	return m_maxLife;
+}
+
 void Object::setPosX(float x)
 {
 	m_x = x;
@@ -184,6 +194,16 @@ void Object::setTeam(int t)
 	team = t;
 }
 
+void Object::setLevel(float l)
+{
+	level = l;
+}
+
+void Object::setmaxLife(float ml)
+{
+	m_maxLife = ml;
+}
+
 void Object::Update(float E_Time)
 {
 	accumETime += E_Time * 0.001;
@@ -216,7 +236,7 @@ void Object::Update(float E_Time)
 	
 }
 
-void Object::BulletUpdate(float E_Time)
+void Object::BulletArrowUpdate(float E_Time)
 {
 	m_x = m_x + m_dirX * m_speed * E_Time * 0.001;
 	m_y = m_y + m_dirY * m_speed * E_Time * 0.001;

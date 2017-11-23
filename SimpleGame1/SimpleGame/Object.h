@@ -22,11 +22,13 @@ class Object {
 	float m_dirY = 1;
 
 	float m_life;
+	float m_maxLife;
 	float m_lifetime = 1000000;
 
 	int arr = -1;
 
 	int team = 0;
+	float level;
 
 public:
 	Object();
@@ -47,6 +49,8 @@ public:
 	float getAccumTime();
 	int getArr();
 	int getTeam();
+	int getLevel();
+	int getmaxLife();
 
 	void setPosX(float x);
 	void setPosY(float y);
@@ -64,7 +68,9 @@ public:
 	void setAccumTime(float accumTime);
 	void setArr(int arr);
 	void setTeam(int t);
+	void setLevel(float l);
+	void setmaxLife(float ml);
 
 	void Update(float E_Time);
-	void BulletUpdate(float E_Time);
+	void BulletArrowUpdate(float E_Time);
 };

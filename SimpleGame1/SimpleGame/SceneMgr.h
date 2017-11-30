@@ -13,10 +13,16 @@ private:
 	Object* m_objects[MAX_OBJECTS_COUNT];
 	GLint m_texCharacter;
 	GLint m_texCharacter2;
+	GLint m_texBackGround;
+	GLint m_texCookie;
+	GLint m_texCat;
 	
 	float accuTime = 0;
 	float CharacterCool = 0;
 	bool CharacterRespawn = true;
+	float cookie = 0;
+	float cat = 0;
+	float cat1 = 0;
 
 public:
 	SceneMgr();

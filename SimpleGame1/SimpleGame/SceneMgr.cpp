@@ -8,11 +8,18 @@ SceneMgr::SceneMgr()
 	m_Renderer = new Renderer(500, 800);
 	m_texCharacter = m_Renderer->CreatePngTexture("./resourse/¿¡ÆçÅ¾.png");
 	m_texCharacter2 = m_Renderer->CreatePngTexture("./resourse/È°Â¦.png");
+	m_texBackGround = m_Renderer->CreatePngTexture("./resourse/¹è°æ.png");
+	m_texCookie = m_Renderer->CreatePngTexture("./resourse/ÄíÅ°.png");
+	m_texCat = m_Renderer->CreatePngTexture("./resourse/°í¾çÀÌ.png");
+	
+	//m_Renderer->DrawTexturedRect(0, 0, 0, 800, 1, 1, 1, 1, m_texBackGround, 0.1);
 	for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
 	{
 		m_objects[i] = NULL;
 	}
 	
+	CreateRect(10, 10, 5, 0, 1);
+
 	CreateRect(0, -250, 1, 0, 2);
 	CreateRect(150, -200, 1, 0, 2);
 	CreateRect(-150, -200, 1, 0, 2);
@@ -34,7 +41,12 @@ void SceneMgr::DrawAll()
 	{ 
 		if (m_objects[i] != NULL)
 		{
-			if (m_objects[i]->getType() == 1)
+			if (m_objects[i]->getType() == 5)
+			{
+				
+				m_Renderer->DrawTexturedRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(), 1, 1, 1, 1, m_texBackGround, 0.9);
+			}
+			else if (m_objects[i]->getType() == 1)
 			{
 				if (m_objects[i]->getTeam() == 2)
 				{
@@ -53,15 +65,31 @@ void SceneMgr::DrawAll()
 			{
 				if (m_objects[i]->getTeam() == 2)
 				{
-					m_Renderer->DrawSolidRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(),
-						m_objects[i]->getPosR(), m_objects[i]->getPosG(), m_objects[i]->getPosB(), m_objects[i]->getPosA(), m_objects[i]->getLevel());
+					if (cookie == 7)
+						cookie = 0;
+					m_Renderer->DrawTexturedRectSeq(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(), 1, 1, 1, 1, m_texCookie, cookie, 0, 6, 1, m_objects[i]->getLevel());
+					cookie += 0.03;
+					//m_Renderer->DrawSolidRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(),
+					//	m_objects[i]->getPosR(), m_objects[i]->getPosG(), m_objects[i]->getPosB(), m_objects[i]->getPosA(), m_objects[i]->getLevel());
 					m_Renderer->DrawSolidRectGauge(m_objects[i]->getPosX(), m_objects[i]->getPosY() + 30, m_objects[i]->getPosZ(), 30, 10, 0.0, 0.0, 1.0, 1.0, (m_objects[i]->getLife() / m_objects[i]->getmaxLife()), LEVEL_CHARACTER);
+					//m_Renderer->DrawTexturedRectSeq(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize())
 				}
 
 				else
 				{
-					m_Renderer->DrawSolidRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(),
-						m_objects[i]->getPosR(), m_objects[i]->getPosG(), m_objects[i]->getPosB(), m_objects[i]->getPosA(), m_objects[i]->getLevel());
+					if (cat == 11)
+					{
+						cat = 0;
+						cat1 += 1;
+					}
+					if (cat1 == 7)
+					{
+						cat1 = 0;
+					}
+					m_Renderer->DrawTexturedRectSeq(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(), 1, 1, 1, 1, m_texCat, cat, cat1, 10, 10, m_objects[i]->getLevel());
+					cat += 0.01;
+					//m_Renderer->DrawSolidRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(),
+					//	m_objects[i]->getPosR(), m_objects[i]->getPosG(), m_objects[i]->getPosB(), m_objects[i]->getPosA(), m_objects[i]->getLevel());
 					m_Renderer->DrawSolidRectGauge(m_objects[i]->getPosX(), m_objects[i]->getPosY() + 30, m_objects[i]->getPosZ(), 30, 10, 1.0, 0.0, 0.0, 1.0, (m_objects[i]->getLife() / m_objects[i]->getmaxLife()), LEVEL_CHARACTER);
 				}
 			}
@@ -105,7 +133,7 @@ void SceneMgr::Update(float E_Time)
 	}
 	for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
 	{
-		if (m_objects[i] != NULL)
+		if (m_objects[i] != NULL && m_objects[i]->getType() != 5)
 		{
 			if (CheckLifeTime(m_objects[i]) == false || CheckLife(m_objects[i]) == false)
 			{
@@ -156,11 +184,11 @@ void SceneMgr::Update(float E_Time)
 
 void SceneMgr::Collision()
 {
-	for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
+	for (int i = 1; i < MAX_OBJECTS_COUNT; ++i)
 	{
-		if (m_objects[i] != NULL)
+		if (m_objects[i] != NULL )
 		{
-			for (int j = 0; j < MAX_OBJECTS_COUNT; ++j)
+			for (int j = 1; j < MAX_OBJECTS_COUNT; ++j)
 			{
 				if (i == j)
 					continue;
@@ -315,6 +343,7 @@ void SceneMgr::CreateRect(float x, float y, int type, int arr, int team)
 						m_objects[i]->setColorG(0.0f);
 						m_objects[i]->setColorB(0.0f);
 						m_objects[i]->setColorA(1.0f);
+						m_objects[i]->setSize(50);
 					}
 					else
 					{
@@ -326,7 +355,7 @@ void SceneMgr::CreateRect(float x, float y, int type, int arr, int team)
 					m_objects[i]->setLife(100);
 					m_objects[i]->setmaxLife(100);
 					m_objects[i]->setType(2);
-					m_objects[i]->setSpeed(300);
+					m_objects[i]->setSpeed(100);
 					m_objects[i]->setDirX(rand() % 20 * 0.1 - 1);
 					m_objects[i]->setDirY(rand() % 20 * 0.1 - 1);
 					m_objects[i]->setTeam(team);
@@ -401,6 +430,20 @@ void SceneMgr::CreateRect(float x, float y, int type, int arr, int team)
 					m_objects[i]->setArr(arr);
 					m_objects[i]->setTeam(team);
 					m_objects[i]->setLevel(LEVEL_ARROW);
+					++CurrentRectCount;
+					break;
+				}
+				else if (type == 5)
+				{
+					m_objects[i] = new Object;
+					m_objects[i]->setPosX(0);
+					m_objects[i]->setPosY(0);
+					m_objects[i]->setPosZ(0);
+					m_objects[i]->setSize(800);
+					m_objects[i]->setType(5);
+					m_objects[i]->setLife(190000);
+					m_objects[i]->setmaxLife(1000);
+					m_objects[i]->setLevel(LEVEL_BACKGROUND);
 					++CurrentRectCount;
 					break;
 				}

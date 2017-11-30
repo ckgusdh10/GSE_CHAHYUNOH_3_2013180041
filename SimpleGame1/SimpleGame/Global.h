@@ -8,3 +8,4 @@
 #define LEVEL_CHARACTER 0.2
 #define LEVEL_BULLET 0.3
 #define LEVEL_ARROW 0.3
+#define LEVEL_BACKGROUND 0

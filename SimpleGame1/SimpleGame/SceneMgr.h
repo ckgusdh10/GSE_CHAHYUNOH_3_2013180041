@@ -16,6 +16,7 @@ private:
 	GLint m_texBackGround;
 	GLint m_texCookie;
 	GLint m_texCat;
+	GLint m_texPar;
 	
 	float accuTime = 0;
 	float CharacterCool = 0;
@@ -23,6 +24,7 @@ private:
 	float cookie = 0;
 	float cat = 0;
 	float cat1 = 0;
+	float ts = 0;
 
 public:
 	SceneMgr();

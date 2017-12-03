@@ -114,6 +114,26 @@ int Object::getmaxLife()
 	return m_maxLife;
 }
 
+float Object::getCookie()
+{
+	return m_cookie;
+}
+
+float Object::getCat()
+{
+	return m_cat;
+}
+
+float Object::getCat1()
+{
+	return m_cat1;
+}
+
+float Object::getTs()
+{
+	return m_ts;
+}
+
 void Object::setPosX(float x)
 {
 	m_x = x;
@@ -202,6 +222,26 @@ void Object::setLevel(float l)
 void Object::setmaxLife(float ml)
 {
 	m_maxLife = ml;
+}
+
+void Object::setCookie(float c)
+{
+	m_cookie = c;
+}
+
+void Object::setCat(float c)
+{
+	m_cat = c;
+}
+
+void Object::setCat1(float c)
+{
+	m_cat1 = c;
+}
+
+void Object::setTs(float t)
+{
+	m_ts = t;
 }
 
 void Object::Update(float E_Time)

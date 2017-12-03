@@ -25,6 +25,11 @@ class Object {
 	float m_maxLife;
 	float m_lifetime = 1000000;
 
+	float m_cat = 0;
+	float m_cat1 = 0;
+	float m_cookie = 0;
+	float m_ts = 0;
+
 	int arr = -1;
 
 	int team = 0;
@@ -51,6 +56,10 @@ public:
 	int getTeam();
 	int getLevel();
 	int getmaxLife();
+	float getCookie();
+	float getCat();
+	float getCat1();
+	float getTs();
 
 	void setPosX(float x);
 	void setPosY(float y);
@@ -70,6 +79,10 @@ public:
 	void setTeam(int t);
 	void setLevel(float l);
 	void setmaxLife(float ml);
+	void setCookie(float c);
+	void setCat(float c);
+	void setCat1(float c);
+	void setTs(float t);
 
 	void Update(float E_Time);
 	void BulletArrowUpdate(float E_Time);

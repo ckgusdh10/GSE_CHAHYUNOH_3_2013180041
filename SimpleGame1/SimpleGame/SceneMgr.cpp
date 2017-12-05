@@ -100,11 +100,11 @@ void SceneMgr::DrawAll()
 				if (m_objects[i]->getTeam() == 1)
 				{
 					m_Renderer->DrawParticle(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(), m_objects[i]->getPosR(), m_objects[i]->getPosG(), m_objects[i]->getPosB(),
-						m_objects[i]->getPosA(), 0, 1, m_texPar, m_objects[i]->getTs());
+						m_objects[i]->getPosA(), -m_objects[i]->getDirx(), -m_objects[i]->getDiry(), m_texPar, m_objects[i]->getTs());
 				}
 				else
 					m_Renderer->DrawParticle(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(), m_objects[i]->getPosR(), m_objects[i]->getPosG(), m_objects[i]->getPosB(),
-						m_objects[i]->getPosA(), 0, -1, m_texPar, m_objects[i]->getTs());
+						m_objects[i]->getPosA(), -m_objects[i]->getDirx(), -m_objects[i]->getDiry(), m_texPar, m_objects[i]->getTs());
 				//ts += 0.1;
 				m_objects[i]->setTs(m_objects[i]->getTs() + 0.01);
 			}
@@ -429,7 +429,7 @@ void SceneMgr::CreateRect(float x, float y, int type, int arr, int team)
 					m_objects[i]->setLife(15);
 					m_objects[i]->setmaxLife(15);
 					m_objects[i]->setType(3);
-					m_objects[i]->setSpeed(50);
+					m_objects[i]->setSpeed(100);
 					
 					m_objects[i]->setTeam(team);
 					m_objects[i]->setLevel(LEVEL_BULLET);

@@ -60,6 +60,8 @@ public:
 	float getCat();
 	float getCat1();
 	float getTs();
+	float getDirx();
+	float getDiry();
 
 	void setPosX(float x);
 	void setPosY(float y);

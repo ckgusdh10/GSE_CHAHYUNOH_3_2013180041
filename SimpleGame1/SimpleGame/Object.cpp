@@ -134,6 +134,16 @@ float Object::getTs()
 	return m_ts;
 }
 
+float Object::getDirx()
+{
+	return m_dirX;
+}
+
+float Object::getDiry()
+{
+	return m_dirY;
+}
+
 void Object::setPosX(float x)
 {
 	m_x = x;

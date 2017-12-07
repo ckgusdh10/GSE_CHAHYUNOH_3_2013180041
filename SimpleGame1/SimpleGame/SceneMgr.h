@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "Renderer.h"
+#include "Sound.h"
 #include <random>
 
 #define MAX_OBJECTS_COUNT 500
@@ -17,6 +18,7 @@ private:
 	GLint m_texCookie;
 	GLint m_texCat;
 	GLint m_texPar;
+	Sound* m_sound = NULL;
 	
 	float accuTime = 0;
 	float CharacterCool = 0;
@@ -25,6 +27,11 @@ private:
 	float cat = 0;
 	float cat1 = 0;
 	float ts = 0;
+	float scaleX = 0;
+	float scaleY = 0;
+	bool Scale = true;
+	bool bCollision = false;
+	GLint backsound;
 
 public:
 	SceneMgr();

@@ -12,12 +12,16 @@ SceneMgr::SceneMgr()
 	m_texCookie = m_Renderer->CreatePngTexture("./resourse/쿠키.png");
 	m_texCat = m_Renderer->CreatePngTexture("./resourse/고양이.png");
 	m_texPar = m_Renderer->CreatePngTexture("./resourse/파티클2.png");
-	
+
 	//m_Renderer->DrawTexturedRect(0, 0, 0, 800, 1, 1, 1, 1, m_texBackGround, 0.1);
 	for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
 	{
 		m_objects[i] = NULL;
 	}
+
+	m_sound = new Sound();
+	backsound = m_sound->CreateSound("./Dependencies/SoundSamples/MF-W-90.XM");
+	m_sound->PlaySound1(backsound, true, 0.2f);
 	
 	CreateRect(10, 10, 5, 0, 1);
 
@@ -116,7 +120,7 @@ void SceneMgr::DrawAll()
 		}
 
 	}
-	
+	m_Renderer->DrawText(-20, 0, GLUT_BITMAP_HELVETICA_18, 1, 0, 0, "Game");
 	
 }
 
@@ -153,7 +157,7 @@ void SceneMgr::Update(float E_Time)
 		{
 			if (CheckLifeTime(m_objects[i]) == false || CheckLife(m_objects[i]) == false)
 			{
-				delete m_objects[i];	
+				delete m_objects[i];
 				m_objects[i] = NULL;
 				--CurrentRectCount;
 			}
@@ -169,24 +173,24 @@ void SceneMgr::Update(float E_Time)
 						--CurrentRectCount;
 					}
 				}
-					
+
 				else
 					m_objects[i]->Update(E_Time);
 			}
 
 
-			
+		
 
 		}
 		
 	}
 	for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
 	{
-		if (m_objects[i] != NULL && m_objects[i]->getType() == 1) 
+		if (m_objects[i] != NULL && m_objects[i]->getType() == 1)
 		{
 			if (m_objects[i]->getAccumTime() >= 10)
 			{
-				
+
 				CreateRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), 3, i, m_objects[i]->getTeam());
 				cout << m_objects[i]->getAccumTime() << endl;
 				m_objects[i]->setAccumTime(0);
@@ -201,7 +205,31 @@ void SceneMgr::Update(float E_Time)
 				m_objects[i]->setAccumTime(0);
 			}
 		}
-		
+	
+	}
+	if (bCollision == true)
+	{
+		m_Renderer->SetSceneTransform(scaleX, scaleY, 1, 1);
+
+		if (Scale == true)
+		{
+			scaleX += 0.2;
+		}
+		else
+		{
+			scaleX -= 0.2;
+		}
+
+		if (scaleX >= 10)
+		{
+			Scale = false;
+		}
+
+		if (scaleX <= 0)
+		{
+			Scale = true;
+			bCollision = false;
+		}
 	}
 	
 	
@@ -228,6 +256,7 @@ void SceneMgr::Collision()
 						{
 							if (m_objects[i]->getType() == 1 && m_objects[j]->getType() == 2)
 							{
+								bCollision = true;
 								m_objects[i]->setColorR(1.0f);
 								m_objects[i]->setColorG(0.0f);
 								m_objects[i]->setColorB(0.0f);
@@ -239,6 +268,7 @@ void SceneMgr::Collision()
 							}
 							else if (m_objects[i]->getType() == 2 && m_objects[j]->getType() == 1)
 							{
+								
 								m_objects[j]->setColorR(1.0f);
 								m_objects[j]->setColorG(0.0f);
 								m_objects[j]->setColorB(0.0f);

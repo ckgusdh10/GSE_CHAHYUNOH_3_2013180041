@@ -11,7 +11,7 @@ SceneMgr::SceneMgr()
 	m_texBackGround = m_Renderer->CreatePngTexture("./resourse/배경1.png");
 	m_texCookie = m_Renderer->CreatePngTexture("./resourse/쿠키.png");
 	m_texCat = m_Renderer->CreatePngTexture("./resourse/고양이.png");
-	m_texPar = m_Renderer->CreatePngTexture("./resourse/파티클2.png");
+	m_texPar = m_Renderer->CreatePngTexture("./resourse/파티클5.png");
 
 	//m_Renderer->DrawTexturedRect(0, 0, 0, 800, 1, 1, 1, 1, m_texBackGround, 0.1);
 	for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
@@ -74,10 +74,8 @@ void SceneMgr::DrawAll()
 						m_objects[i]->setCookie(0);
 					m_Renderer->DrawTexturedRectSeq(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(), 1, 1, 1, 1, m_texCookie, m_objects[i]->getCookie(), 0, 6, 1, m_objects[i]->getLevel());
 					m_objects[i]->setCookie(m_objects[i]->getCookie() + 0.03);
-					//m_Renderer->DrawSolidRect(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(),
-					//	m_objects[i]->getPosR(), m_objects[i]->getPosG(), m_objects[i]->getPosB(), m_objects[i]->getPosA(), m_objects[i]->getLevel());
 					m_Renderer->DrawSolidRectGauge(m_objects[i]->getPosX(), m_objects[i]->getPosY() + 30, m_objects[i]->getPosZ(), 30, 10, 0.0, 0.0, 1.0, 1.0, (m_objects[i]->getLife() / m_objects[i]->getmaxLife()), LEVEL_CHARACTER);
-					//m_Renderer->DrawTexturedRectSeq(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize())
+					
 				}
 
 				else
@@ -104,13 +102,13 @@ void SceneMgr::DrawAll()
 				if (m_objects[i]->getTeam() == 1)
 				{
 					m_Renderer->DrawParticle(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(), m_objects[i]->getPosR(), m_objects[i]->getPosG(), m_objects[i]->getPosB(),
-						m_objects[i]->getPosA(), -m_objects[i]->getDirx(), -m_objects[i]->getDiry(), m_texPar, m_objects[i]->getTs());
+						m_objects[i]->getPosA(), -m_objects[i]->getDirx(), -m_objects[i]->getDiry(), m_texPar, m_objects[i]->getTs(), 0.1);
 				}
 				else
 					m_Renderer->DrawParticle(m_objects[i]->getPosX(), m_objects[i]->getPosY(), m_objects[i]->getPosZ(), m_objects[i]->getPosSize(), m_objects[i]->getPosR(), m_objects[i]->getPosG(), m_objects[i]->getPosB(),
-						m_objects[i]->getPosA(), -m_objects[i]->getDirx(), -m_objects[i]->getDiry(), m_texPar, m_objects[i]->getTs());
+						m_objects[i]->getPosA(), -m_objects[i]->getDirx(), -m_objects[i]->getDiry(), m_texPar, m_objects[i]->getTs(), 0.1);//LEVEL_PARTICLE);
 				//ts += 0.1;
-				m_objects[i]->setTs(m_objects[i]->getTs() + 0.01);
+				m_objects[i]->setTs(m_objects[i]->getTs() + 0.005);
 			}
 			else
 			{
@@ -120,6 +118,9 @@ void SceneMgr::DrawAll()
 		}
 
 	}
+	m_Renderer->DrawParticleClimate(0, 0, 0, 1, 1, 1, 1, 1, -0.1, -0.1, m_texPar, accel, 0.1);
+	accel += 0.01;
+
 	m_Renderer->DrawText(-20, 0, GLUT_BITMAP_HELVETICA_18, 1, 0, 0, "Game");
 	
 }
@@ -495,7 +496,7 @@ void SceneMgr::CreateRect(float x, float y, int type, int arr, int team)
 					m_objects[i]->setLife(10);
 					m_objects[i]->setmaxLife(10);
 					m_objects[i]->setType(4);
-					m_objects[i]->setSpeed(100);
+					m_objects[i]->setSpeed(50);
 					m_objects[i]->setArr(arr);
 					m_objects[i]->setTeam(team);
 					m_objects[i]->setLevel(LEVEL_ARROW);

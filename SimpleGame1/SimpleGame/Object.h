@@ -54,7 +54,7 @@ public:
 	float getAccumTime();
 	int getArr();
 	int getTeam();
-	int getLevel();
+	float getLevel();
 	int getmaxLife();
 	float getCookie();
 	float getCat();

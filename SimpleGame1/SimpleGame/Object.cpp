@@ -104,7 +104,7 @@ int Object::getTeam()
 	return team;
 }
 
-int Object::getLevel()
+float Object::getLevel()
 {
 	return level;
 }

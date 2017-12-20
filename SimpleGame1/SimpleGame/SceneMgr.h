@@ -33,6 +33,8 @@ private:
 	bool bCollision = false;
 	GLint backsound;
 
+	float accel = 0;
+
 public:
 	SceneMgr();
 	~SceneMgr();

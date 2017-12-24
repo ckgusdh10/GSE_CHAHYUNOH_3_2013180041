@@ -18,7 +18,11 @@ private:
 	GLint m_texCookie;
 	GLint m_texCat;
 	GLint m_texPar;
+	GLint m_GameOver;
+	GLint m_catPar;
 	Sound* m_sound = NULL;
+	Sound* m_sound1 = NULL;
+	Object* m_elixir[10];
 	
 	float accuTime = 0;
 	float CharacterCool = 0;
@@ -32,14 +36,23 @@ private:
 	bool Scale = true;
 	bool bCollision = false;
 	GLint backsound;
+	float elixirCount = 10;
+	float elixirCreateTime = 0;
+	float elixirTime = 0;
+	float CurTime = 0;
+	float EndTime = 0;
+	float Cparx = 0;
+	float Cpary = 0;
 
 	float accel = 0;
+	bool GameState = true;
+	float OverTime = 0;
 
 public:
 	SceneMgr();
 	~SceneMgr();
 
-	void DrawAll();
+	void DrawAll(float E_Time);
 	void Update(float E_Time);
 	void Collision();
 	void CreateRect(float x, float y, int type, int arr, int team);

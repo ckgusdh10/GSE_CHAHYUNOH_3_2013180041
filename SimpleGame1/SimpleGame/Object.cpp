@@ -296,4 +296,9 @@ void Object::BulletArrowUpdate(float E_Time)
 	}
 }
 
+void Object::CharacterUpdate(float E_Time)
+{
+	
+}
+
 

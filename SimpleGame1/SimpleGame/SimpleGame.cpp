@@ -38,16 +38,16 @@ void RenderScene(void)
 	auto ETime = CurTime - g_start;
 	g_start = CurTime;
 
-	CharacterCool += ETime * 0.001;
-	if (CharacterCool >= 7)
-	{
-		CharacterRespawn = true;
-	}
+	//CharacterCool += ETime * 0.001;
+	//if (CharacterCool >= 0)
+	//{
+	//	CharacterRespawn = true;
+	//}
 	
 
 	g_SceneMgr->Update((float)ETime);
 	g_SceneMgr->Collision();
-	g_SceneMgr->DrawAll();
+	g_SceneMgr->DrawAll((float)ETime);
 	
 
 	glutSwapBuffers();
@@ -63,19 +63,35 @@ void MouseInput(int button, int state, int x, int y)
 	
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
 	{
-		if (CharacterRespawn == true)
+			
+		if (x > 250)
 		{
-			if (y > 400)
-			{
-				cout << x << "\t" << y << endl;
-				g_SceneMgr->CreateRect(x - 250, -y + 400, 2, 0, 2);
-				CharacterRespawn = false;
-				CharacterCool = 0;
-			}
+			g_SceneMgr->CreateRect(60, -250, 2, 0, 2);
 			
 		}
+		else
+		{
+			g_SceneMgr->CreateRect(-60, -250, 2, 0, 2);
+		
+		}
+		
+		
+	}
+	if (button == GLUT_RIGHT_BUTTON && state == GLUT_UP)
+	{
+		
+		if (x > 250)
+		{
+			g_SceneMgr->CreateRect(60, -250, 6, 0, 2);
 			
-
+		}
+		else
+		{
+			g_SceneMgr->CreateRect(-60, -250, 6, 0, 2);
+			
+		}
+		
+		
 	}
 	RenderScene();
 }

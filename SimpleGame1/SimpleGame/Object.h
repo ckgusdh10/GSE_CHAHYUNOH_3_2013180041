@@ -30,6 +30,9 @@ class Object {
 	float m_cookie = 0;
 	float m_ts = 0;
 
+	float m_Cparx = 0;
+	float m_Cpary = 0;
+
 	int arr = -1;
 
 	int team = 0;
@@ -62,6 +65,8 @@ public:
 	float getTs();
 	float getDirx();
 	float getDiry();
+	float getCparx() { return m_Cparx; };
+	float getCpary() { return m_Cpary; }
 
 	void setPosX(float x);
 	void setPosY(float y);
@@ -85,7 +90,10 @@ public:
 	void setCat(float c);
 	void setCat1(float c);
 	void setTs(float t);
+	void setCparx(float c) { m_Cparx = c; }
+	void setCpary(float c) { m_Cpary = c; }
 
 	void Update(float E_Time);
 	void BulletArrowUpdate(float E_Time);
+	void CharacterUpdate(float E_Time);
 };

@@ -182,6 +182,7 @@ void SceneMgr::DrawAll(float E_Time)
 	}
 	else
 	{
+		m_Renderer->DrawText(-20, 0, GLUT_BITMAP_HELVETICA_18, 1, 0, 0, "Game");
 		OverTime += E_Time * 0.001;
 		for (int i = 0; i < MAX_OBJECTS_COUNT; ++i)
 		{
@@ -912,7 +913,7 @@ void SceneMgr::CreateRect(float x, float y, int type, int arr, int team)
 						m_objects[i]->setDirX(rand() % 20 * 0.1 - 1);
 						m_objects[i]->setDirY(rand() % 20 * 0.1 + 0.1);
 					}
-					m_objects[i]->setLife(15);
+					m_objects[i]->setLife(50);
 					m_objects[i]->setmaxLife(15);
 					m_objects[i]->setType(3);
 					m_objects[i]->setSpeed(100);
@@ -948,7 +949,7 @@ void SceneMgr::CreateRect(float x, float y, int type, int arr, int team)
 						m_objects[i]->setDirX(rand() % 20 * 0.1 - 1);
 						m_objects[i]->setDirY(rand() % 20 * 0.1 + 0.1);
 					}
-					m_objects[i]->setLife(10);
+					m_objects[i]->setLife(40);
 					m_objects[i]->setmaxLife(10);
 					m_objects[i]->setType(4);
 					m_objects[i]->setSpeed(50);
